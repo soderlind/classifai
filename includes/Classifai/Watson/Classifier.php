@@ -53,10 +53,10 @@ class Classifier {
 	 * @return array|WP_Error
 	 */
 	public function classify( $text, $options = [], $request_options = [] ) {
-		$body = $this->get_body( $text, $options );
+		$body = $this->get_body( $text, apply_filters( 'classifai_options', $options ) );
 
 		$request_options['body'] = $body;
-		$request = $this->get_request();
+		$request                 = $this->get_request();
 
 		if ( empty( $request_options['timeout'] ) && ! empty( $options['timeout'] ) ) {
 			$request_options['timeout'] = $options['timeout'];
